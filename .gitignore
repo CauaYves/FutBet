@@ -1,0 +1,22 @@
+# Arquivos gerados pelo sistema operacional
+.DS_Store
+
+# Dependências Node.js
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Arquivos de ambiente
+.env*
+
+# Arquivos de build ou saída gerados
+build/
+dist/
+
+# Arquivos de configuração locais
+config/local.js
+
+# Dependências de desenvolvimento
+.dev/
