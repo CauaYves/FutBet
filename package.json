@@ -58,6 +58,6 @@
     "tsconfig-paths": "^4.2.0"
   },
   "engines": {
-    "node": "^16.13.0"
+    "node": ">=17 <18"
   }
 }
