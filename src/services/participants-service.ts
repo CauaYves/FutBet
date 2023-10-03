@@ -2,6 +2,7 @@ import httpStatus from 'http-status';
 import participantsRepository from '@/repositories/participants-repository';
 import { Participant, PostParticipant } from '../../protocols';
 import { noContentError } from '@/errors/no-content-error';
+import { invalidDataError } from '@/errors';
 
 // Interface para a resposta da API de participantes
 interface ApiResponse<Participant> {
@@ -32,6 +33,9 @@ async function createParticipant(
     updatedAt: now,
   });
 
+  if(!participant) {
+    throw invalidDataError(["error on participant creation"])
+  }
   return participant;
 }
 

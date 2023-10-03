@@ -6,6 +6,8 @@ import faker from '@faker-js/faker';
 import httpStatus from 'http-status';
 import { participantsService } from '@/services';
 import { fakerParticipant } from '../factories/participant-factory';
+import { invalidDataError } from '@/errors';
+import participantsRepository from '@/repositories/participants-repository';
 
 beforeAll(async () => {
   await init();
@@ -57,6 +59,27 @@ describe("POST /participants", () => {
   })
   expect(response.statusCode).toBe(httpStatus.BAD_REQUEST)
   })
+  
+  // Mock da participantsRepository para simular o cenário onde createParticipant lança uma exceção
+  jest.mock('../../src/repositories/participants-repository', () => ({
+    createParticipant: jest.fn(() => {
+      throw invalidDataError(["error on participant creation"]);
+    }),
+  }));
+
+  it("should return status 500.", async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    jest.spyOn(participantsRepository, "createParticipant").mockImplementation(() => {
+      return undefined
+    })
+    const nameParticipant = faker.name.firstName();
+    const balanceParticipant = faker.datatype.number({min: 1000, max: 10000});
+    const response = await server.post("/participants").send({
+      name: nameParticipant,
+      balance: balanceParticipant
+    })
+    expect(response.statusCode).toBe(500)
+  });
 })
 
 describe("GET /participants", () => {
@@ -66,6 +89,12 @@ describe("GET /participants", () => {
     expect(response.data).toEqual([
       participantFake
     ])
+  })
+
+  it("should return all participants and their balances", async () => {
+    const response = await server.get("/participants")
+    expect(response.statusCode).toBe(204)
+    expect(response.body).toEqual({})
   })
 
   it("should return NULL when no have participants on database", async () => {

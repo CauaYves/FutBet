@@ -4,7 +4,7 @@ import supertest from 'supertest';
 import { cleanDb } from '../helpers';
 import faker from '@faker-js/faker';
 import httpStatus from 'http-status';
-import { fakerGame } from '../factories';
+import { fakerBet, fakerGame, fakerParticipant } from '../factories';
 import { gamesService } from '@/services';
 import { prisma } from '@/config/database';
 
@@ -57,16 +57,10 @@ describe("GET /games", () => {
       id: game.id
     })
   })
-  
-  it("should return status 204 when no have any game on database", async () => {
-    expect
-    try {
-      await gamesService.getGames();
-      // Se a função acima não lançar uma exceção, o teste deve falhar
-      fail('Expected an exception to be thrown');
-    } catch (error) {
-      expect(error.message).toEqual('No have games posted.');
-    }
+
+  it("should an empty array when no have games on database", async () => {
+    const response = await server.get("/games")
+    expect(response.body).toEqual({})
   })
 })
 
@@ -122,4 +116,15 @@ describe("POST /games/:id/finish", () => {
     expect(response.statusCode).toBe(httpStatus.CREATED)
   })
   //PRECISA CRIAR O TESTE COM APOSTAS, MAS NÃO CRIEI FACTORY DE APOSTAS AINDA.
+  it("should return statusSADOADPUIOASHNDO", async () => {
+    const game = await fakerGame(3, 0, false)
+    const participant = await fakerParticipant(6000)
+    await fakerBet(participant.id, game, 3000)
+    const body = {
+      homeTeamScore: game.homeTeamScore,
+      awayTeamScore: game.awayTeamScore
+    }
+    const response = await server.post(`/games/${game.id}/finish`).send(body)
+    expect(response.statusCode).toBe(httpStatus.CREATED)
+  })
 })

@@ -12,3 +12,5 @@ export async function fakerParticipant(balanceParam?: number) {
     }
   })
 }
+  // status: string;
+  // amountWon: number | null;

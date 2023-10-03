@@ -9,15 +9,13 @@ async function createBet(betData: PostBet, participant: Participant) {
   return prisma.$transaction(async (prismaClient) => {
     const newBalance = participant.balance - betData.amountBet;
 
-    const updatedParticipant: Participant = await prismaClient.participant.update({
+    await prismaClient.participant.update({
       where: { id: betData.participantId },
       data: {
         balance: newBalance,
         updatedAt: new Date(),
       },
     });
-
-    console.log(updatedParticipant);
 
     const createdBet = await prismaClient.bet.create({ data: betData });
 

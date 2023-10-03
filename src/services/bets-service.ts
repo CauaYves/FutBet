@@ -1,3 +1,4 @@
+import { unauthorizedError } from '@/errors';
 import { Bet, PostBet } from '../../protocols';
 import betsRepository from '@/repositories/bets-repository';
 import gamesRepository from '@/repositories/games-repository';
@@ -39,8 +40,3 @@ async function createBet(betData: Omit<PostBet, 'createdAt' | 'updatedAt' | 'sta
 export const betsService = {
   createBet,
 };
-
-// Função para gerar um erro não autorizado
-function unauthorizedError() {
-  throw new Error('Unauthorized Error: Function not implemented.');
-}

@@ -64,7 +64,6 @@ async function finishGame(gameId: number, score: { homeTeamScore: number; awayTe
   }
   // Atualiza o status do jogo
   const updatedGame = await gamesRepository.finishGame(gameId, score.homeTeamScore, score.awayTeamScore);
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~")
   // Calcula o montante total ganho  
   const totalWinningAmount = existingGame.bets.reduce((total: number, bet: Bet) => total + bet.amountBet, 0);
   const houseEdge = 0.3;
