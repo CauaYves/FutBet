@@ -3,7 +3,7 @@ import gamesRepository from '@/repositories/games-repository';
 import participantsRepository from '@/repositories/participants-repository';
 import betsRepository from '@/repositories/bets-repository';
 import { Bet, Game, PostGame } from '../../protocols';
-import { notFoundError } from '@/errors';
+import { noContentError, notFoundError } from '@/errors';
 import roundDown from '@/utils/roundDown';
 
 // Interface para a resposta da API de jogos
@@ -16,11 +16,7 @@ interface ApiResponse<Game> {
 async function getGames(): Promise<ApiResponse<Game>> {
   const games = await gamesRepository.fetchGames();
   if (!games || !games.length) {
-    // Retorna o status 204 (NO_CONTENT) quando nenhum jogo é encontrado
-    return {
-      status: httpStatus.NO_CONTENT,
-      data: null,
-    };
+    throw noContentError("No have games posted.")
   }
   return {
     status: httpStatus.OK,

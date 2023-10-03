@@ -16,7 +16,7 @@ export async function getGames(req: Request, res: Response) {
     const result = await gamesService.getGames();
     return res.status(result.status).send(result.data);
   } catch (err) {
-    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    return res.sendStatus(httpStatus.NO_CONTENT);
   }
 }
 
