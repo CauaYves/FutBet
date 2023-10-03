@@ -24,6 +24,9 @@
     "dev:migration:generate": "npm run dev:load-envs prisma migrate dev",
     "dev": "cross-env NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts"
   },
+  "prisma": {
+    "schema": "prisma/schema.prisma"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
