@@ -68,3 +68,22 @@ describe("GET /games", () => {
     }
   })
 })
+
+describe("GET /games/:id", () => {
+  it("should return one game and status 200", async () => {
+    const game = await fakerGame()
+    const response = await gamesService.getGameById(game.id)
+    expect(response.data).toEqual({...game, bets: []})
+  })
+
+  it("should return no content and status 204", async () => {
+    const response = await server.get("/games/1")
+    expect(response.body).toEqual({})
+    expect(response.statusCode).toBe(httpStatus.NO_CONTENT)
+  })
+
+  it("should return bad request error", async () => {
+    const response = await server.get("/games/dois")
+    expect(response.statusCode).toBe(httpStatus.BAD_REQUEST)
+  })
+})

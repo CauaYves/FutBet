@@ -25,7 +25,7 @@ export async function getGameById(req: Request, res: Response) {
     const result = await gamesService.getGameById(parseInt(req.params.id, 10));
     return res.status(result.status).send(result.data);
   } catch (err) {
-    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    return res.sendStatus(httpStatus.NO_CONTENT);
   }
 }
 
@@ -34,6 +34,6 @@ export async function finishGame(req: Request, res: Response) {
     const result = await gamesService.finishGame(parseInt(req.params.id, 10), req.body);
     return res.status(httpStatus.CREATED).send(result);
   } catch (err) {
-    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    return res.sendStatus(httpStatus.NO_CONTENT);
   }
 }
