@@ -16,6 +16,6 @@ export async function getParticipants(req: Request, res: Response) {
     const result = await participantsService.getParticipants();
     return res.status(result.status).send(result.data);
   } catch (err) {
-    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    return res.sendStatus(httpStatus.NO_CONTENT);
   }
 }

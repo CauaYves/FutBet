@@ -1,6 +1,7 @@
 import httpStatus from 'http-status';
 import participantsRepository from '@/repositories/participants-repository';
 import { Participant, PostParticipant } from '../../protocols';
+import { noContentError } from '@/errors/no-content-error';
 
 // Interface para a resposta da API de participantes
 interface ApiResponse<Participant> {
@@ -12,11 +13,7 @@ interface ApiResponse<Participant> {
 async function getParticipants(): Promise<ApiResponse<Participant>> {
   const participants = await participantsRepository.fetchParticipants();
   if (!participants || !participants.length) {
-    // Retorna o status 204 (NO_CONTENT) quando nenhum participante é encontrado
-    return {
-      status: httpStatus.NO_CONTENT,
-      data: null,
-    };
+    throw noContentError("No have participants")
   }
   return {
     status: httpStatus.OK,
