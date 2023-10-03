@@ -8,3 +8,8 @@ export const gamesSchema = Joi.object({
   homeTeamName: Joi.string().required(),
   awayTeamName: Joi.string().required(),
 });
+
+export const finishGameSchema = Joi.object({
+  homeTeamScore: Joi.number().required(),
+  awayTeamScore: Joi.number().required(),
+})

@@ -34,6 +34,6 @@ export async function finishGame(req: Request, res: Response) {
     const result = await gamesService.finishGame(parseInt(req.params.id, 10), req.body);
     return res.status(httpStatus.CREATED).send(result);
   } catch (err) {
-    return res.sendStatus(httpStatus.NO_CONTENT);
+    return res.sendStatus(httpStatus.NOT_FOUND);
   }
 }

@@ -60,21 +60,19 @@ async function finishGame(gameId: number, score: { homeTeamScore: number; awayTe
   const existingGame = await gamesRepository.retrieveGameById(gameId);
 
   if (!existingGame || existingGame.isFinished) {
-    // Jogo não encontrado ou já finalizado
-    throw new Error('Jogo não encontrado ou já finalizado.');
+    throw notFoundError()
   }
-
   // Atualiza o status do jogo
   const updatedGame = await gamesRepository.finishGame(gameId, score.homeTeamScore, score.awayTeamScore);
-
-  // Calcula o montante total ganho
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~")
+  // Calcula o montante total ganho  
   const totalWinningAmount = existingGame.bets.reduce((total: number, bet: Bet) => total + bet.amountBet, 0);
   const houseEdge = 0.3;
   const totalAmountWon = totalWinningAmount * (1 - houseEdge);
 
   // Atualiza todas as apostas
   for (const bet of existingGame.bets) {
-    const participant = await participantsRepository.retrieveParticipantById(bet.participantId);
+    const participant = await participantsRepository.retrieveParticipantById(bet.participantId);//COVERAGE_THIS_LINE
 
     if (bet.status === 'PENDING') {
       if (bet.homeTeamScore === score.homeTeamScore && bet.awayTeamScore === score.awayTeamScore) {
@@ -89,7 +87,7 @@ async function finishGame(gameId: number, score: { homeTeamScore: number; awayTe
           await participantsRepository.modifyParticipant(participant.id, newBalance);
         } else {
           // Aposta perdida
-          await betsRepository.modifyBet(bet.id, 'LOST', 0);
+          await betsRepository.modifyBet(bet.id, 'LOST', 0); //COVERAGE_THIS_LINE
         }
       }
     }

@@ -6,6 +6,7 @@ import faker from '@faker-js/faker';
 import httpStatus from 'http-status';
 import { fakerGame } from '../factories';
 import { gamesService } from '@/services';
+import { prisma } from '@/config/database';
 
 beforeAll(async () => {
   await init();
@@ -86,4 +87,39 @@ describe("GET /games/:id", () => {
     const response = await server.get("/games/dois")
     expect(response.statusCode).toBe(httpStatus.BAD_REQUEST)
   })
+})
+
+describe("POST /games/:id/finish", () => {
+  it("should return status 404 when game doesn't exist", async () => {
+    const body = {
+      homeTeamScore: 1,
+      awayTeamScore: 2
+    }
+    const response = await server.post("/games/99/finish").send(body)
+    expect(response.statusCode).toBe(httpStatus.NOT_FOUND)
+  })
+
+  it("should update the status finished from false to true", async () => {
+    const game = await fakerGame(3, 0, false)
+    const body = {
+      homeTeamScore: game.homeTeamScore,
+      awayTeamScore: game.awayTeamScore
+    }
+    await server.post(`/games/${game.id}/finish`).send(body)
+    const statusGame = await prisma.game.findUnique({
+      where: {id: game.id}
+    })
+    expect(statusGame.isFinished).toBe(true)
+  })
+
+  it("should return status 200", async () => {
+    const game = await fakerGame(3, 0, false)
+    const body = {
+      homeTeamScore: game.homeTeamScore,
+      awayTeamScore: game.awayTeamScore
+    }
+    const response = await server.post(`/games/${game.id}/finish`).send(body)
+    expect(response.statusCode).toBe(httpStatus.CREATED)
+  })
+  //PRECISA CRIAR O TESTE COM APOSTAS, MAS NÃO CRIEI FACTORY DE APOSTAS AINDA.
 })
