@@ -1,9 +1,10 @@
 import { prisma } from "@/config/database";
 import faker from '@faker-js/faker';
 
-export async function fakerParticipant() {
+export async function fakerParticipant(balanceParam?: number) {
   const name = faker.name.firstName("male")
-  const balance = Number(faker.finance.account(4))
+  const balance = balanceParam || Number(faker.finance.account(5)) 
+
   return prisma.participant.create({
     data: {
       name,

@@ -15,7 +15,6 @@ const server = supertest(app)
 describe("POST /bets", () => {  
   it("bets test", async () => {
     const response = await server.post("/bets")
-    console.log(response)
     expect(true).toBe(true)
   })
 })
