@@ -1,8 +1,7 @@
 import httpStatus from 'http-status';
-import participantsRepository from '@/repositories/participants-repository';
 import { Participant, PostParticipant } from '../../protocols';
-import { noContentError } from '@/errors/no-content-error';
-import { invalidDataError } from '@/errors';
+import { invalidDataError, noContentError } from '@/errors';
+import participantsRepository from '@/repositories/participants-repository';
 
 // Interface para a resposta da API de participantes
 interface ApiResponse<Participant> {

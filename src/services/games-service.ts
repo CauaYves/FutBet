@@ -71,7 +71,7 @@ async function finishGame(gameId: number, score: { homeTeamScore: number; awayTe
 
   // Atualiza todas as apostas
   for (const bet of existingGame.bets) {
-    const participant = await participantsRepository.retrieveParticipantById(bet.participantId);//COVERAGE_THIS_LINE
+    const participant = await participantsRepository.retrieveParticipantById(bet.participantId);
 
     if (bet.status === 'PENDING') {
       if (bet.homeTeamScore === score.homeTeamScore && bet.awayTeamScore === score.awayTeamScore) {
@@ -86,7 +86,7 @@ async function finishGame(gameId: number, score: { homeTeamScore: number; awayTe
           await participantsRepository.modifyParticipant(participant.id, newBalance);
         } else {
           // Aposta perdida
-          await betsRepository.modifyBet(bet.id, 'LOST', 0); //COVERAGE_THIS_LINE
+          await betsRepository.modifyBet(bet.id, 'LOST', 0);
         }
       }
     }
