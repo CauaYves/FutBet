@@ -5,6 +5,7 @@
   "main": "src/server.ts",
   "scripts": {
     "prebuild": "rm -rf dist",
+    "prisma": "prisma",
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/src/server.js",
     "migration:run": "prisma migrate deploy",
