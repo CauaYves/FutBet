@@ -45,7 +45,6 @@ export type PostGame = {
   awayTeamScore: number;
   isFinished: boolean;
 };
-
 export type IdOnParams = {
   id: string;
 };

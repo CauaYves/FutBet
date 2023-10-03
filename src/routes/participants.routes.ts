@@ -1,10 +1,10 @@
-import { Router } from "express";
-import { validateBody } from "../middlewares";
-import { participantSchema } from "../schemas";
-import { createParticipant } from "../controllers";
+import { Router } from 'express';
+import { validateBody } from '@/middlewares';
+import { createParticipant, getParticipants } from '@/controllers';
+import { participantsSchema } from '@/schemas';
 
-const participantsRouter = Router()
+const participantsRouter = Router();
 
-participantsRouter.post("/", validateBody(participantSchema), createParticipant)
+participantsRouter.get('/', getParticipants).post('/', validateBody(participantsSchema), createParticipant);
 
-export { participantsRouter }
+export { participantsRouter };

@@ -15,6 +15,6 @@ const server = supertest(app)
 describe("POST /bets", () => {  
   it("bets test", async () => {
     const response = await server.post("/bets")
-    expect(true).toBe(true)
+    expect(response.statusCode).toBe(httpStatus.BAD_REQUEST)
   })
 })

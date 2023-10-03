@@ -20,3 +20,5 @@ config/local.js
 
 # Dependências de desenvolvimento
 .dev/
+
+coverage

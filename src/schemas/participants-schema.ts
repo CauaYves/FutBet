@@ -1,7 +1,6 @@
-import Joi from "joi";
+import Joi from 'joi';
 
-export const participantSchema = Joi.object({
-  name: Joi.string().max(16).required(),
-  balance: Joi.number().min(1000).required()
+export const participantsSchema = Joi.object({
+  name: Joi.string().required(),
+  balance: Joi.number().required().min(1000),
 });
- 
