@@ -1,7 +1,7 @@
 # FutBet
 
 ### link para deploy: 
-    postgres://cldlweft:FKlvJEvgCxbsVlPflG6OoZ1sYR2UTuyT@mahmud.db.elephantsql.com/cldlweft
+    https://futbet-api.onrender.com
 
 # Como rodar o projeto
 
