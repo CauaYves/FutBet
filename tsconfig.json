@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": "src", // Pode variar dependendo da sua estrutura de diretórios
+    "paths": {
+      "@/*": ["src/*"] // Mapeia qualquer caminho começando com "@" para a pasta "src"
+    },
     "target": "es2020",
     "module": "commonjs",
     "outDir": "dist",
@@ -8,10 +12,6 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "rootDirs": ["src", "tests"],
-    "baseUrl": "src",
-    "paths": {
-      "@/*": ["*"]
-    },
     "plugins": [
       {
         "transform": "typescript-transform-paths"

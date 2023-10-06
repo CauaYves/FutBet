@@ -88,7 +88,7 @@ async function finishGame(gameId: number, score: { homeTeamScore: number; awayTe
           // Aposta perdida
           await betsRepository.modifyBet(bet.id, 'LOST', 0);
         }
-      }
+      }//FIXME
     }
   }
 
