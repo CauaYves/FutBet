@@ -1,5 +1,5 @@
 import { prisma } from '@/config/database';
-import { PostGame } from '../../protocols';
+import { PostGame } from '../protocols';
 
 async function fetchGames() {
   return prisma.game.findMany();

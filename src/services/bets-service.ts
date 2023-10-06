@@ -1,5 +1,5 @@
 import { unauthorizedError } from '@/errors';
-import { Bet, PostBet } from '../../protocols';
+import { Bet, PostBet } from '../protocols';
 import betsRepository from '@/repositories/bets-repository';
 import gamesRepository from '@/repositories/games-repository';
 import participantsRepository from '@/repositories/participants-repository';

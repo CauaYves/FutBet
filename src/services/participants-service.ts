@@ -1,5 +1,5 @@
 import httpStatus from 'http-status';
-import { Participant, PostParticipant } from '../../protocols';
+import { Participant, PostParticipant } from '../protocols';
 import { invalidDataError, noContentError } from '@/errors';
 import participantsRepository from '@/repositories/participants-repository';
 

@@ -1,5 +1,5 @@
 import { prisma } from "@/config/database"
-import { Game } from "../../protocols"
+import { Game } from "../protocols"
 
 
 export async function fakerBet(participantId: number, game: Game, amountBet: number, status: string = "PENDING") {

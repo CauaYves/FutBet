@@ -2,7 +2,7 @@ import httpStatus from 'http-status';
 import gamesRepository from '@/repositories/games-repository';
 import participantsRepository from '@/repositories/participants-repository';
 import betsRepository from '@/repositories/bets-repository';
-import { Bet, Game, PostGame } from '../../protocols';
+import { Bet, Game, PostGame } from '../protocols';
 import { noContentError, notFoundError } from '@/errors';
 import roundDown from '@/utils/roundDown';
 

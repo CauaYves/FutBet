@@ -1,5 +1,5 @@
 import { prisma } from '@/config/database';
-import { PostParticipant } from '../../protocols';
+import { PostParticipant } from '../protocols';
 
 async function fetchParticipants() {
   return prisma.participant.findMany();

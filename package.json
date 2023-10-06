@@ -6,8 +6,8 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "prisma": "prisma",
-    "build": "tsc -p tsconfig.build.json",
-    "start": "node dist/src/server.js",
+    "build": "tsc -p tsconfig.build.json && tscpaths -p tsconfig.build.json -s ./src -o ./dist",
+    "start": "node dist/server.js",
     "migration:run": "prisma migrate deploy",
     "migration:generate": "npm run dev:load-envs prisma migrate dev",
     "lint": "eslint .",
@@ -59,9 +59,7 @@
     "nodemon": "^3.0.1",
     "prisma": "^5.3.1",
     "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.2.0"
-  },
-  "engines": {
-    "node": ">=17 <18"
+    "tsconfig-paths": "^4.2.0",
+    "tscpaths": "^0.0.9"
   }
 }
